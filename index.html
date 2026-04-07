@@ -128,23 +128,22 @@
             color: #f0fdf4;
         }
 
-        /* --- Bottom Image Pop-out Styling --- */
+        /* --- Bottom Image Pop-out Carousel Styling --- */
         .popout-box {
             position: fixed;
-            bottom: -200px; /* Start off-screen */
+            bottom: -300px; /* Start off-screen */
             left: 50%;
             transform: translateX(-50%);
             background: #ffffff;
             padding: 12px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
-            width: 300px; 
+            width: 320px; 
             z-index: 1000;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Smooth slide up */
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Class added via JS to trigger the pop-out */
         .popout-box.show {
             bottom: 30px;
             opacity: 1;
@@ -153,12 +152,13 @@
         .scroll-container {
             display: flex;
             overflow-x: auto;
-            gap: 12px;
-            padding-bottom: 6px;
+            gap: 16px; /* Space between the images when scrolling */
+            padding-bottom: 8px;
+            scroll-snap-type: x mandatory; /* Forces snapping to individual images */
             scroll-behavior: smooth;
         }
 
-        /* Custom scrollbar for the image container */
+        /* Custom scrollbar */
         .scroll-container::-webkit-scrollbar {
             height: 6px;
         }
@@ -172,13 +172,14 @@
         }
 
         .scroll-container img {
-            height: 140px; 
-            width: auto;
-            flex-shrink: 0;
+            flex: 0 0 100%; /* Forces each image to take up exactly 100% of the viewable area */
+            height: 200px; /* Adjust this height if needed to fit your aspect ratio */
+            width: 100%;
             border-radius: 6px;
             border: 1px solid #e5e7eb;
             object-fit: contain;
             background: #f9fafb;
+            scroll-snap-align: center; /* Snaps the image to the center of the box */
         }
     </style>
 </head>

@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate Verification</title>
+    <title>eDocuments | Secure Certificate Verification</title>
     <style>
-        /* General page styling */
+        /* Modern, professional font stack */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #f3f4f6; /* Soft, professional grey background */
+            color: #1f2937;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Loading Screen Styling */
+        /* --- Loading Screen Styling --- */
         #loader {
             position: fixed;
             top: 0;
@@ -31,19 +32,20 @@
         }
 
         .spinner {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #14532d; /* Dark green */
+            border: 3px solid #e5e7eb;
+            border-top: 3px solid #14532d;
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 16px;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
         }
 
         #loader p {
-            font-size: 18px;
-            color: #14532d;
-            font-weight: 600;
+            font-size: 16px;
+            color: #4b5563;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             margin: 0;
         }
 
@@ -52,73 +54,146 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Top header section - Space between left logo and right secure badge */
+        /* --- Header Styling --- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 15px 40px;
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .header img {
-            max-height: 80px; 
+            max-height: 60px; /* Kept slightly smaller for a cleaner top bar */
             width: auto;
         }
 
-        /* Secure Verification Badge on Top Right */
         .secure-badge {
             display: flex;
             align-items: center;
-            color: #166534; /* Green color to match the theme */
+            background-color: #f0fdf4;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #bbf7d0;
+            color: #166534;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
+            letter-spacing: 0.3px;
         }
 
         .secure-badge svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
             fill: currentColor;
         }
 
-        /* Main content container */
+        /* --- Main Content Styling --- */
         .container {
-            max-width: 800px;
-            margin: 80px auto;
+            max-width: 850px;
+            margin: 50px auto;
             padding: 0 20px;
         }
 
-        /* Dark green verification box styling - Reduced vertical padding */
+        .document-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        /* Verification Box (Dark Green) */
         .verification-box {
             display: flex;
             align-items: center;
             background-color: #14532d; 
-            border: 2px solid #064e3b; 
-            border-radius: 12px;
-            padding: 15px 30px; /* Reduced top/bottom padding to make it less wide vertically */
-            box-shadow: 0 4px 15px rgba(20, 83, 45, 0.2);
+            padding: 20px 30px;
+            border-bottom: 4px solid #064e3b;
         }
 
-        /* Tick icon styling */
         .tick-icon {
             flex-shrink: 0;
-            width: 40px; /* Slightly smaller to match reduced box height */
-            height: 40px;
+            width: 36px;
+            height: 36px;
             margin-right: 20px;
             color: #4ade80; 
+            background: #064e3b;
+            border-radius: 50%;
+            padding: 4px;
         }
 
-        /* Text styling inside the box */
         .verification-text {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.5;
             color: #ffffff; 
         }
 
         .verification-text strong {
+            font-weight: 600;
+            color: #f0fdf4;
+        }
+
+        .status-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #86efac;
             font-weight: 700;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        /* --- Details Table Styling --- */
+        .details-section {
+            padding: 40px;
+        }
+
+        .details-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            row-gap: 16px;
+            column-gap: 20px;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        /* --- Footer Styling --- */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+            padding-bottom: 40px;
+        }
+
+        .footer a {
+            color: #1d4ed8;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -126,11 +201,11 @@
 
     <div id="loader">
         <div class="spinner"></div>
-        <p>Verifying...</p>
+        <p>Authenticating secure document...</p>
     </div>
 
     <header class="header">
-        <img src="download.png" alt="University Logo">
+        <img src="download.png" alt="Institution Logo">
         
         <div class="secure-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -141,29 +216,59 @@
     </header>
 
     <main class="container">
-        <div class="verification-box">
-            <svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-            </svg>
+        <div class="document-card">
             
-            <div class="verification-text">
-                This certificate was issued by University of Oxford to <strong>minki seoyeon</strong> on 22 Sep 2022
+            <div class="verification-box">
+                <svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                </svg>
+                
+                <div class="verification-text">
+                    <span class="status-title">Authentication Successful</span>
+                    This certificate was issued by <strong>University of Oxford</strong> to <strong>minki seoyeon</strong> on <strong>22 Sep 2022</strong>.
+                </div>
             </div>
+
+            <div class="details-section">
+                <div class="details-header">Official Document Record</div>
+                
+                <div class="details-grid">
+                    <div class="detail-label">Recipient Name</div>
+                    <div class="detail-value">Minki Seoyeon</div>
+
+                    <div class="detail-label">Issuing Institution</div>
+                    <div class="detail-value">University of Oxford</div>
+
+                    <div class="detail-label">Date of Award</div>
+                    <div class="detail-value">22 September 2022</div>
+
+                    <div class="detail-label">Document Status</div>
+                    <div class="detail-value" style="color: #16a34a; font-weight: 600;">Valid & Authenticated</div>
+
+                    <div class="detail-label">System Reference ID</div>
+                    <div class="detail-value" style="font-family: monospace; background: #f3f4f6; padding: 2px 6px; border-radius: 4px;">OXF-8834-AUTH-92</div>
+                </div>
+            </div>
+
         </div>
     </main>
+
+    <footer class="footer">
+        <p>Valid when viewed securely on this portal.</p>
+        <p>If you have questions regarding this document, please contact <a href="mailto:edocuments.support@admin.ox.ac.uk">edocuments.support@admin.ox.ac.uk</a>.</p>
+        <p>&copy; 2026 University of Oxford Registry Services.</p>
+    </footer>
 
     <script>
         window.addEventListener('load', function() {
             setTimeout(function() {
                 var loader = document.getElementById('loader');
-                // Fade out effect
                 loader.style.opacity = '0';
                 
-                // Remove from view completely after fade out finishes
                 setTimeout(function() {
                     loader.style.display = 'none';
-                }, 500); // 500ms matches the CSS transition time
-            }, 2000); // 2000ms = 2 seconds
+                }, 500); 
+            }, 2000); 
         });
     </script>
 </body>

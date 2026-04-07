@@ -128,26 +128,31 @@
             color: #f0fdf4;
         }
 
-        /* --- Bottom Image Pop-out Carousel Styling --- */
+        /* --- Image Pop-out Carousel Styling --- */
+        .popout-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px; /* Adds space below the green box */
+            margin-bottom: 40px;
+        }
+
         .popout-box {
-            position: fixed;
-            bottom: -500px; /* Start further off-screen in case images are tall */
-            left: 50%;
-            transform: translateX(-50%);
             background: #ffffff;
             padding: 10px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
-            width: 90%; /* Responsive width */
-            max-width: 450px; /* Made the box significantly wider */
-            z-index: 1000;
+            width: 100%; 
+            max-width: 450px; 
+            /* Hidden state for animation */
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px); /* Pushes it down slightly */
+            transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Visible state triggered by JavaScript */
         .popout-box.show {
-            bottom: 30px;
             opacity: 1;
+            transform: translateY(0); /* Slides up to normal position */
         }
 
         .scroll-container {
@@ -174,9 +179,9 @@
 
         .scroll-container img {
             flex: 0 0 100%; 
-            width: 100%; /* Take up the full width of the larger container */
-            height: auto; /* Height automatically scales to perfectly match the image, leaving no empty space */
-            display: block; /* Removes the small default gap under images */
+            width: 100%; 
+            height: auto; /* Scales perfectly to the image ratio */
+            display: block; 
             border-radius: 6px;
             border: 1px solid #e5e7eb;
             scroll-snap-align: center; 
@@ -211,14 +216,16 @@
                 This certificate was issued by <strong>University of Oxford</strong> to <strong>minki seoyeon</strong> on <strong>22 Sep 2022</strong>.
             </div>
         </div>
-    </main>
 
-    <div class="popout-box" id="imagePopout">
-        <div class="scroll-container">
-            <img src="oxford1.png" alt="Oxford Document Image 1">
-            <img src="oxford2.png" alt="Oxford Document Image 2">
+        <div class="popout-wrapper">
+            <div class="popout-box" id="imagePopout">
+                <div class="scroll-container">
+                    <img src="oxford1.png" alt="Oxford Document Image 1">
+                    <img src="oxford2.png" alt="Oxford Document Image 2">
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script>
         window.addEventListener('load', function() {
@@ -231,10 +238,10 @@
                 setTimeout(function() {
                     loader.style.display = 'none';
                     
-                    // Trigger the bottom pop-out box to slide up half a second after the loader finishes
+                    // Trigger the pop-out box to slide up smoothly
                     setTimeout(function() {
                         document.getElementById('imagePopout').classList.add('show');
-                    }, 500);
+                    }, 300);
 
                 }, 500); 
             }, 2000); 

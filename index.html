@@ -131,14 +131,15 @@
         /* --- Bottom Image Pop-out Carousel Styling --- */
         .popout-box {
             position: fixed;
-            bottom: -300px; /* Start off-screen */
+            bottom: -500px; /* Start further off-screen in case images are tall */
             left: 50%;
             transform: translateX(-50%);
             background: #ffffff;
-            padding: 12px;
+            padding: 10px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
-            width: 320px; 
+            width: 90%; /* Responsive width */
+            max-width: 450px; /* Made the box significantly wider */
             z-index: 1000;
             opacity: 0;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -152,9 +153,9 @@
         .scroll-container {
             display: flex;
             overflow-x: auto;
-            gap: 16px; /* Space between the images when scrolling */
+            gap: 16px; 
             padding-bottom: 8px;
-            scroll-snap-type: x mandatory; /* Forces snapping to individual images */
+            scroll-snap-type: x mandatory; 
             scroll-behavior: smooth;
         }
 
@@ -172,14 +173,13 @@
         }
 
         .scroll-container img {
-            flex: 0 0 100%; /* Forces each image to take up exactly 100% of the viewable area */
-            height: 200px; /* Adjust this height if needed to fit your aspect ratio */
-            width: 100%;
+            flex: 0 0 100%; 
+            width: 100%; /* Take up the full width of the larger container */
+            height: auto; /* Height automatically scales to perfectly match the image, leaving no empty space */
+            display: block; /* Removes the small default gap under images */
             border-radius: 6px;
             border: 1px solid #e5e7eb;
-            object-fit: contain;
-            background: #f9fafb;
-            scroll-snap-align: center; /* Snaps the image to the center of the box */
+            scroll-snap-align: center; 
         }
     </style>
 </head>
